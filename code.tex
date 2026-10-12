@@ -1,0 +1,100 @@
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{vsbg}{HTML}{1E1E1E}
+\definecolor{vsfg}{HTML}{D4D4D4}
+\definecolor{vskeyword}{HTML}{569CD6}
+\definecolor{vstype}{HTML}{4EC9B0}
+\definecolor{vscontrol}{HTML}{C586C0}
+\definecolor{vsfunc}{HTML}{DCDCAA}
+\definecolor{vsvar}{HTML}{9CDCFE}
+\definecolor{vsnumber}{HTML}{B5CEA8}
+\definecolor{vsstring}{HTML}{CE9178}
+\definecolor{vscomment}{HTML}{6A9955}
+\definecolor{vslinenum}{HTML}{858585}
+
+\lstdefinelanguage{CVSCode}{
+  language = C,
+  deletekeywords = {for, while, if, else, return, switch, case, break, continue, do, goto},
+  morekeywords = [1]{int, char, void, long, short, unsigned, signed, float, double, const, static,
+    struct, sizeof},
+  morekeywords = [2]{for, while, if, else, return, switch, case, break, continue, do, goto},
+}
+
+\lstdefinestyle{vscodedark}{
+  language = CVSCode,
+  backgroundcolor = \color{vsbg},
+  basicstyle = \ttfamily\small\color{vsfg},
+  keywordstyle = [1]\color{vskeyword},
+  keywordstyle = [2]\color{vscontrol},
+  keywordstyle = [3]\color{vsfunc},
+  commentstyle = \color{vscomment}\itshape,
+  stringstyle = \color{vsstring},
+  numberstyle = \tiny\color{vslinenum},
+  numbers = left,
+  numbersep = 10pt,
+  stepnumber = 1,
+  tabsize = 2,
+  showtabs = false,
+  showspaces = false,
+  showstringspaces = false,
+  breaklines = true,
+  frame = single,
+  rulecolor = \color{vsbg},
+  framesep = 8pt,
+  xleftmargin = 22pt,
+  framexleftmargin = 18pt,
+  columns = fullflexible,
+  keepspaces = true,
+  literate=
+    {0}{{{\color{vsnumber}0}}}1
+    {1}{{{\color{vsnumber}1}}}1
+    {2}{{{\color{vsnumber}2}}}1
+    {3}{{{\color{vsnumber}3}}}1
+    {4}{{{\color{vsnumber}4}}}1
+    {5}{{{\color{vsnumber}5}}}1
+    {6}{{{\color{vsnumber}6}}}1
+    {7}{{{\color{vsnumber}7}}}1
+    {8}{{{\color{vsnumber}8}}}1
+    {9}{{{\color{vsnumber}9}}}1,
+}
+
+\lstset{style = vscodedark}
+
+\newcommand{\proc}[1]{\textsc{#1}}
+\newcommand{\id}[1]{\textit{#1}}
+\renewcommand{\gets}{\mathrel{=}}
+\newcommand{\Procname}[1]{\noindent#1\par\smallskip\noindent}
+\newcommand{\kw}[1]{\textbf{#1}}
+\newcommand{\For}{\kw{for}\ }
+\newcommand{\To}{\ \kw{to}\ }
+\newcommand{\Downto}{\ \kw{downto}\ }
+\newcommand{\While}{\kw{while}\ }
+\newcommand{\If}{\kw{if}\ }
+\newcommand{\Then}{\ \kw{then}}
+\newcommand{\Else}{\kw{else}\ }
+\newcommand{\Return}{\kw{return}\ }
+\newcommand{\CodeComment}[1]{\textit{// #1}}
+
+\newcounter{codeline}
+\newcounter{codeindent}
+\newlength{\codeindentwidth}
+\setlength{\codeindentwidth}{1.4em}
+
+\newcommand{\Do}{\addtocounter{codeindent}{1}}
+\newcommand{\End}{\addtocounter{codeindent}{-1}}
+
+\newcommand{\li}{%
+  \stepcounter{codeline}%
+  \par\noindent
+  \makebox[1.8em][l]{\small\arabic{codeline}}%
+  \hspace{\value{codeindent}\codeindentwidth}%
+}
+
+\newenvironment{codebox}{%
+  \setcounter{codeline}{0}%
+  \setcounter{codeindent}{0}%
+  \par\noindent\ignorespaces
+}{%
+  \par
+}

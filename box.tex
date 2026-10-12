@@ -1,0 +1,116 @@
+\tcbset{
+  notebox/.style = {
+    enhanced,
+    breakable,
+    colback = white,
+    colframe = black,
+    colbacktitle = black,
+    coltitle = white,
+    fonttitle = \bfseries,
+    boxrule = 1pt,
+    arc = 0pt,
+    left = 8pt,
+    right = 8pt,
+    top = 6pt,
+    bottom = 6pt,
+  },
+}
+
+\newtcolorbox{definitionbox}[1][]{notebox, title = {#1}}
+
+\newtcolorbox{theorembox}[1][]{notebox, title = {#1}, boxrule = 2.2pt}
+
+\newtcolorbox{propositionbox}[1][]{
+  notebox,
+  colframe = black!70,
+  colbacktitle = black!70,
+  title = {#1},
+}
+
+\newtcolorbox{axiombox}[1][]{
+  notebox,
+  colback = black!4,
+  title = {#1},
+  toprule = 3pt,
+  bottomrule = 3pt,
+  leftrule = 0.75pt,
+  rightrule = 0.75pt,
+}
+
+\newtcolorbox{lemmabox}[1][]{
+  notebox,
+  colframe = black!55,
+  colbacktitle = black!55,
+  title = {#1},
+  boxrule = 0.8pt,
+  arc = 4pt,
+}
+
+\newtcolorbox{corollarybox}[1][]{
+  notebox,
+  colframe = black!55,
+  colbacktitle = black!55,
+  fonttitle = \bfseries\itshape,
+  title = {#1},
+  boxrule = 0.8pt,
+  arc = 4pt,
+}
+
+\newtcolorbox{propertybox}[1][]{
+  notebox,
+  colback = black!3,
+  colframe = black!40,
+  colbacktitle = black!40,
+  title = {#1},
+  boxrule = 0.6pt,
+  arc = 4pt,
+}
+
+\newtcolorbox{summarybox}[1][]{
+  notebox,
+  colback = black!6,
+  title = {#1},
+  toprule = 0.75pt,
+  bottomrule = 0.75pt,
+  leftrule = 3pt,
+  rightrule = 3pt,
+}
+
+\newtcolorbox{remarkbox}[1][]{
+  notebox,
+  colframe = black!30,
+  colbacktitle = black!30,
+  coltitle = black,
+  fonttitle = \itshape,
+  title = {#1},
+  boxrule = 0.5pt,
+  arc = 6pt,
+}
+
+\newtcolorbox{homeworkbox}[1][]{
+  notebox,
+  colback = black!8,
+  title = {#1},
+  boxrule = 0.8pt,
+}
+
+\newtcolorbox{examplebox}[1][]{
+  notebox,
+  colback = black!5,
+  colframe = black!45,
+  colbacktitle = black!45,
+  title = {#1},
+  boxrule = 0.8pt,
+  arc = 3pt,
+}
+
+\newtcolorbox{proofbox}[1][]{
+  notebox,
+  colframe = black!25,
+  colbacktitle = black!25,
+  coltitle = black,
+  fonttitle = \itshape,
+  title = {#1},
+  boxrule = 0.5pt,
+  arc = 2pt,
+}

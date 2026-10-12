@@ -1,0 +1,42 @@
+\newcommand{\notesline}{My study notes for the \sourcetype}
+\newcommand{\aiusageclaim}{Written and proofread in collaboration with AI}
+
+\newcommand{\sourcelink}{\href{\sourceurl}{\sourcetitle}}
+\newcommand{\authorlink}{\href{\authorurl}{\authorname}}
+\newcommand{\hdrtext}{\notesline{} \sourcelink}
+\newcommand{\ftrtext}{Online Learner: \authorlink{} | \aiusageclaim}
+
+\title{\texorpdfstring{\textsc{\notesline \\ \sourcelink}}{\notesline}}
+\author{Online Learner: \authorlink \\ \aiusageclaim}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\DeclareMathOperator{\argmin}{arg\,min}
+\DeclareMathOperator{\argmax}{arg\,max}
+\newcommand{\defeq}{\mathrel{\mathop:}=}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+
+\newcommand{\sumrange}[3][i]{\sum\limits_{#1 = #2}^{#3}}
+\newcommand{\prodrange}[3][i]{\prod\limits_{#1 = #2}^{#3}}
+
+\newcommand{\forrange}[3]{\foreach \i in {#1,...,#2}{#3}}
+\newcommand{\forlist}[2]{\foreach \x in {#1}{#2}}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{\emph{#1}}}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\newcommand{\note}[1]{\textcolor{blue}{[Note: #1]}}
+\newcommand{\dx}{\Delta x}
+\newcommand{\df}{\Delta f}

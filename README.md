@@ -1,9 +1,43 @@
 ## Introduction
 Modular LaTeX preamble and build configuration for my study notes of books, courses and papers.
 
-## Installation
+## Submodule
+
+#### Installation
 ```bash
 git submodule add https://github.com/gapry/LaTeX-Common.git common
+```
+
+#### Set URL
+```bash
+git submodule set-url -- common git@github.com:gapry/LaTeX-Common.git
+git submodule sync
+
+git add .gitmodules
+git commit -S -m "submodule: change url from https to ssh"
+git push origin main
+```
+
+#### Sync
+```bash
+git submodule update --remote common
+git add common
+git commit -S -m "submodule: sync"
+git push origin main
+```
+
+#### Update
+```bash
+cd common/
+git checkout main
+git add .
+git commit -S -m "feat: xxx"
+git push origin main
+
+cd ..
+git add common
+git commit -S -m "submodule: add feat XXX"
+git push origin main
 ```
 
 ## Usage

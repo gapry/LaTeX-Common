@@ -87,7 +87,8 @@
 % ============================================================
 % Number highlighting
 % ============================================================
-\newcommand{\vsdigits}{%
+\lstdefinestyle{vsdigits}{
+  literate =
   {0}{{{\color{vsnumber}0}}}1
   {1}{{{\color{vsnumber}1}}}1
   {2}{{{\color{vsnumber}2}}}1
@@ -129,7 +130,7 @@
   keywordstyle = [3]\color{vstype},
   keywordstyle = [4]\color{vsfunc},
   directivestyle = \color{vscontrol},
-  literate = \vsdigits,
+  style = vsdigits,
 }
 
 \lstnewenvironment{ccodeblock}[1][]
@@ -164,7 +165,7 @@
   keywordstyle = [1]\color{vscontrol},
   keywordstyle = [2]\color{vsfunc},
   keywordstyle = [3]\color{vskeyword},
-  literate = \vsdigits,
+  style = vsdigits,
 }
 
 \lstnewenvironment{rcodeblock}[1][]

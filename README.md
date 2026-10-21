@@ -41,7 +41,23 @@ git push origin main
 ```
 
 ## Usage
-In `main.tex`, define the following macros **before** `\input{common/newcommand}`. All are required.
+
+#### 1. Project Structure 
+
+It is recommended to split your project into 3 LaTeX files.
+
+```bash
+your-notes/
+├── main.tex     # entry point
+├── preamble.tex # import common modules
+├── info.tex     # your metadata
+├── Makefile     # build config 
+├── common/      # submodule
+└── build/       # generated pdf
+```
+
+#### 2. Define Metadata
+In `info.tex`, define the following macros. All are required and must be defined **before** `\input{common/newcommand}`.
 
 | Macro          | Description                                  | Example                                   |
 |----------------|----------------------------------------------|-------------------------------------------|
@@ -51,13 +67,52 @@ In `main.tex`, define the following macros **before** `\input{common/newcommand}
 | `\authorname`  | Your name, shown in the footer and title     | `Gapry`                                   |
 | `\authorurl`   | Link to your profile                         | `https://github.com/gapry`                |
 
-### Example
+```bash
+$ vim info.tex
+```
 ```latex
 \newcommand{\sourcetype}{course}
 \newcommand{\sourcetitle}{Signals and Systems}
 \newcommand{\sourceurl}{https://ocw.mit.edu/courses/res-6-007-signals-and-systems-spring-2011/}
 \newcommand{\authorname}{Gapry}
 \newcommand{\authorurl}{https://github.com/gapry}
+```
 
+#### 3. Load Common Modules
+```bash
+vim preamble.tex
+```
+```latex
+\input{info}
+\input{common/layout}
+\input{common/math}
+\input{common/tikz}
+\input{common/code}
+\input{common/box}
 \input{common/newcommand}
+\input{common/hyperref}
+```
+
+#### 4. Main Entry
+```bash
+vim main.tex
+```
+```latex
+\documentclass[11pt]{report}
+\usepackage{import}
+\input{preamble}
+\begin{document}
+\maketitle
+\end{document}
+```
+
+#### 5. Build Config
+```bash
+vim Makefile
+```
+```make
+DIR_BUILD = build
+FILENAME  = main
+
+include common/common.mk
 ```

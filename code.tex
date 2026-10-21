@@ -1,6 +1,9 @@
 \usepackage{xcolor}
 \usepackage{listings}
 
+% ============================================================
+% Common
+% ============================================================
 \definecolor{vsbg}{HTML}{1E1E1E}
 \definecolor{vsfg}{HTML}{D4D4D4}
 \definecolor{vskeyword}{HTML}{569CD6}
@@ -13,21 +16,9 @@
 \definecolor{vscomment}{HTML}{6A9955}
 \definecolor{vslinenum}{HTML}{858585}
 
-\lstdefinelanguage{CVSCode}{
-  language = C,
-  deletekeywords = {for, while, if, else, return, switch, case, break, continue, do, goto},
-  morekeywords = [1]{int, char, void, long, short, unsigned, signed, float, double, const, static,
-    struct, sizeof},
-  morekeywords = [2]{for, while, if, else, return, switch, case, break, continue, do, goto},
-}
-
-\lstdefinestyle{vscodedark}{
-  language = CVSCode,
+\lstdefinestyle{common}{
   backgroundcolor = \color{vsbg},
   basicstyle = \ttfamily\small\color{vsfg},
-  keywordstyle = [1]\color{vskeyword},
-  keywordstyle = [2]\color{vscontrol},
-  keywordstyle = [3]\color{vsfunc},
   commentstyle = \color{vscomment}\itshape,
   stringstyle = \color{vsstring},
   numberstyle = \tiny\color{vslinenum},
@@ -44,25 +35,22 @@
   framesep = 8pt,
   xleftmargin = 22pt,
   framexleftmargin = 18pt,
+  aboveskip = 1em,
+  belowskip = 1em,
   columns = fullflexible,
   keepspaces = true,
-  literate=
-    {0}{{{\color{vsnumber}0}}}1
-    {1}{{{\color{vsnumber}1}}}1
-    {2}{{{\color{vsnumber}2}}}1
-    {3}{{{\color{vsnumber}3}}}1
-    {4}{{{\color{vsnumber}4}}}1
-    {5}{{{\color{vsnumber}5}}}1
-    {6}{{{\color{vsnumber}6}}}1
-    {7}{{{\color{vsnumber}7}}}1
-    {8}{{{\color{vsnumber}8}}}1
-    {9}{{{\color{vsnumber}9}}}1,
 }
 
-\lstset{style = vscodedark}
+\lstnewenvironment{codeblock}[1][]
+  {\lstset{style=common, #1}}
+  {}
 
+% ============================================================
+% Pseudocode 
+% ============================================================
 \newcommand{\proc}[1]{\textsc{#1}}
 \newcommand{\id}[1]{\textit{#1}}
+% Global override: every \gets in the document becomes "=".
 \renewcommand{\gets}{\mathrel{=}}
 \newcommand{\Procname}[1]{\noindent#1\par\smallskip\noindent}
 \newcommand{\kw}[1]{\textbf{#1}}
@@ -75,22 +63,19 @@
 \newcommand{\Else}{\kw{else}\ }
 \newcommand{\Return}{\kw{return}\ }
 \newcommand{\CodeComment}[1]{\textit{// #1}}
-
 \newcounter{codeline}
 \newcounter{codeindent}
 \newlength{\codeindentwidth}
 \setlength{\codeindentwidth}{1.4em}
-
 \newcommand{\Do}{\addtocounter{codeindent}{1}}
 \newcommand{\End}{\addtocounter{codeindent}{-1}}
-
 \newcommand{\li}{%
   \stepcounter{codeline}%
   \par\noindent
-  \makebox[1.8em][l]{\small\arabic{codeline}}%
+  % Wide enough for three-digit line numbers.
+  \makebox[2.4em][l]{\small\arabic{codeline}}%
   \hspace{\value{codeindent}\codeindentwidth}%
 }
-
 \newenvironment{codebox}{%
   \setcounter{codeline}{0}%
   \setcounter{codeindent}{0}%
@@ -98,3 +83,90 @@
 }{%
   \par
 }
+
+% ============================================================
+% Number highlighting
+% ============================================================
+\newcommand{\vsdigits}{%
+  {0}{{{\color{vsnumber}0}}}1
+  {1}{{{\color{vsnumber}1}}}1
+  {2}{{{\color{vsnumber}2}}}1
+  {3}{{{\color{vsnumber}3}}}1
+  {4}{{{\color{vsnumber}4}}}1
+  {5}{{{\color{vsnumber}5}}}1
+  {6}{{{\color{vsnumber}6}}}1
+  {7}{{{\color{vsnumber}7}}}1
+  {8}{{{\color{vsnumber}8}}}1
+  {9}{{{\color{vsnumber}9}}}1
+}
+
+% ============================================================
+% C Programming Language
+% ============================================================
+\lstdefinelanguage{CVSCode}{
+  language = C,
+  deletekeywords = {for, while, if, else, return, switch, case, break, continue, do, goto},
+  % [1] blue: keywords
+  morekeywords = [1]{int, char, void, long, short, unsigned, signed, float, double,
+    const, static, struct, sizeof, auto, enum, union, typedef, extern, volatile, register},
+  % [2] purple: control flow
+  morekeywords = [2]{for, while, if, else, return, switch, case, default, break,
+    continue, do, goto},
+  % [3] teal: types
+  morekeywords = [3]{bool, size_t, ssize_t, FILE, int8_t, int16_t, int32_t, int64_t,
+    uint8_t, uint16_t, uint32_t, uint64_t},
+  % [4] yellow: common functions
+  morekeywords = [4]{main, printf, scanf, fprintf, sprintf, snprintf, malloc, calloc,
+    realloc, free, memcpy, memset, strlen, strcmp, strcpy, fopen, fclose, puts, getchar},
+  morecomment = [l]{//},
+}
+
+\lstdefinestyle{c}{
+  style = common,
+  language = CVSCode,
+  keywordstyle = [1]\color{vskeyword},
+  keywordstyle = [2]\color{vscontrol},
+  keywordstyle = [3]\color{vstype},
+  keywordstyle = [4]\color{vsfunc},
+  directivestyle = \color{vscontrol},
+  literate = \vsdigits,
+}
+
+\lstnewenvironment{ccodeblock}[1][]
+  {\lstset{style=c, #1}}
+  {}
+
+% ============================================================
+% R Programming Language
+% ============================================================
+\lstdefinelanguage{RVSC}{
+  % Treat "." and "_" as identifier letters so data.frame, paste0, NA_integer_ match as one token.
+  alsoletter = {._},
+  % [1] purple: control flow
+  morekeywords = [1]{if, else, for, while, repeat, in, next, break, return},
+  % [2] yellow: common functions
+  morekeywords = [2]{library, require, source, c, list, data.frame, matrix, vector,
+    factor, print, cat, paste, paste0, length, nrow, ncol, sum, mean, seq, rep, apply,
+    sapply, lapply},
+  % [3] blue: function keyword and constants
+  morekeywords = [3]{function, TRUE, FALSE, NULL, NA, Inf, NaN,
+    NA_integer_, NA_real_, NA_complex_, NA_character_},
+  sensitive = true,
+  morecomment = [l]{\#},
+  morestring = [b]",
+  morestring = [b]',
+  moredelim = [s][\color{vsvar}]{`}{`},
+}
+
+\lstdefinestyle{r}{
+  style = common,
+  language = RVSC,
+  keywordstyle = [1]\color{vscontrol},
+  keywordstyle = [2]\color{vsfunc},
+  keywordstyle = [3]\color{vskeyword},
+  literate = \vsdigits,
+}
+
+\lstnewenvironment{rcodeblock}[1][]
+  {\lstset{style=r, #1}}
+  {}

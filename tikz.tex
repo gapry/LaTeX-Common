@@ -1,7 +1,39 @@
 \usepackage[dvipsnames]{xcolor}
+
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
-\usetikzlibrary{arrows.meta, patterns, intersections}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{automata}
+\usetikzlibrary{intersections}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+
 \usepackage{pgfplots}
 \pgfplotsset{compat = 1.17}
 \usepackage[most]{tcolorbox}
+
+\tikzset{
+  hl/.style  = {fill=black!25},
+  new/.style = {blue, very thick},
+  dfa/.style = {shorten >=1pt, node distance=3.2cm, on grid, auto,
+    >=stealth, every state/.style={inner sep=1pt, minimum size=1.5cm}},
+}
+
+\newcommand{\dn}[2]{\shortstack{$#1$\\[-1pt]{\scriptsize$\{#2\}$}}}
+\newcommand{\nfapic}[4]{%
+  \begin{tikzpicture}[shorten >=1pt, node distance=1.9cm, on grid, auto,
+    >=stealth, every state/.style={minimum size=0.9cm, inner sep=1pt}]
+    \node[state, initial, initial text=, #1] (0) {0};
+    \node[state, #2] (1) [right=of 0] {1};
+    \node[state, #3] (2) [right=of 1] {2};
+    \node[state, accepting, #4] (3) [right=of 2] {3};
+    \path[->]
+      (0) edge [loop above] node {\small $a$} (0)
+      (0) edge [loop below] node {\small $b$} (0)
+      (0) edge node {\small $a$} (1)
+      (1) edge node {\small $b$} (2)
+      (2) edge node {\small $b$} (3);
+  \end{tikzpicture}%
+}
+

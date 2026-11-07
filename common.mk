@@ -12,4 +12,7 @@ clean:
 view:
 	xdg-open $(DIR_BUILD)/$(PDF_NAME).pdf >/dev/null 2>&1
 
-.PHONY: default compile clean view
+fmt:
+	latexindent -rv -l=$(ROOT_DIR)/.latexindent.yaml -g /dev/null -o $(TEX_NAME).tex $(TEX_NAME).tex
+
+.PHONY: default compile clean view fmt

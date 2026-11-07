@@ -1,6 +1,6 @@
 LATEX_FLAGS = -xelatex -interaction=nonstopmode -file-line-error -jobname=$(PDF_NAME) -output-directory=$(DIR_BUILD)
 
-default: compile view
+default: fmt compile view
 
 compile:
 	mkdir -p $(DIR_BUILD)
